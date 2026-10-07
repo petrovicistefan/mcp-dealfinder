@@ -1,0 +1,51 @@
+{
+  "refreshHours": 6,
+  "networks": {
+    "amazon": { "kind": "amazon", "tag": "yourtag-21" },
+    "awin": { "kind": "awin", "affiliateId": "123456" },
+    "mynetwork": {
+      "kind": "template",
+      "template": "https://tracking.example-network.com/click?aff={affId}&camp={campaignId}&sub={subId}&to={urlEncoded}",
+      "params": { "affId": "YOUR_ACCOUNT_ID" }
+    }
+  },
+  "feeds": [
+    {
+      "id": "awin-example-store",
+      "network": "awin",
+      "merchant": "Example Store",
+      "merchantId": "7890",
+      "source": "https://productdata.awin.com/datafeed/download/apikey/YOUR_KEY/language/en/fid/XXXX/columns/aw_product_id,product_name,merchant_deep_link,search_price,currency,merchant_image_url,brand_name,merchant_category,description/format/csv/delimiter/%2C/compression/gzip/",
+      "format": "csv",
+      "currency": "EUR",
+      "map": {
+        "id": "aw_product_id",
+        "title": "product_name",
+        "url": "merchant_deep_link",
+        "price": "search_price",
+        "currency": "currency",
+        "imageUrl": "merchant_image_url",
+        "brand": "brand_name",
+        "category": "merchant_category",
+        "description": "description"
+      }
+    },
+    {
+      "id": "my-json-feed",
+      "network": "mynetwork",
+      "merchant": "Another Shop",
+      "params": { "campaignId": "42" },
+      "source": "feeds/another-shop.json",
+      "format": "json",
+      "jsonPath": "products",
+      "currency": "RON",
+      "map": {
+        "id": "sku",
+        "title": "name",
+        "url": "link",
+        "price": "price.amount",
+        "brand": "brand"
+      }
+    }
+  ]
+}

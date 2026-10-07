@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.env
+*.log
+# your personal config holds your affiliate IDs and feed URLs (which may contain API keys)
+dealfinder.config.json

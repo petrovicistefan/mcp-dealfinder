@@ -1,0 +1,56 @@
+{
+  "name": "mcp-dealfinder",
+  "version": "0.1.0",
+  "description": "MCP server that searches affiliate product feeds from any network and returns tracked buy links with a visible disclosure.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "affiliate",
+    "product-feed",
+    "awin"
+  ],
+  "license": "MIT",
+  "author": "Stefan Petrovici",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petrovicistefan/mcp-dealfinder.git"
+  },
+  "type": "module",
+  "main": "dist/lib.js",
+  "types": "dist/lib.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib.d.ts",
+      "default": "./dist/lib.js"
+    }
+  },
+  "bin": {
+    "mcp-dealfinder": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "check": "tsx scripts/check.ts",
+    "link-template": "tsx scripts/link-template.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
