@@ -121,6 +121,12 @@ src/
   lib.ts          public library API
 ```
 
+## Author
+
+Built by **[Stefan Petrovici](https://petrovicistefan.ro)**, software engineer based in Iași, Romania, working with clients worldwide.
+
+**I'm open to work.** I build web and mobile apps and take ideas from first sketch to production. I'm also interested in partnerships, and I work project-based or time-based. If you need an MCP server, an AI assistant for your shop or product, or a payments/integration problem solved, get in touch via [petrovicistefan.ro](https://petrovicistefan.ro).
+
 ## License
 
 [MIT](LICENSE). Paid extensions built on this library are distributed separately.

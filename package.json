@@ -14,7 +14,10 @@
     "claude"
   ],
   "license": "MIT",
-  "author": "Stefan Petrovici",
+  "author": {
+    "name": "Stefan Petrovici",
+    "url": "https://petrovicistefan.ro"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/petrovicistefan/mcp-dealfinder.git"
