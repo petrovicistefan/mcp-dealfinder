@@ -7,7 +7,11 @@
     "model-context-protocol",
     "affiliate",
     "product-feed",
-    "awin"
+    "awin",
+    "affiliate-marketing",
+    "shopping",
+    "deals",
+    "claude"
   ],
   "license": "MIT",
   "author": "Stefan Petrovici",
@@ -52,5 +56,10 @@
     "@types/node": "^26.6.4",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
-  }
+  },
+  "homepage": "https://github.com/petrovicistefan/mcp-dealfinder#readme",
+  "bugs": {
+    "url": "https://github.com/petrovicistefan/mcp-dealfinder/issues"
+  },
+  "mcpName": "io.github.petrovicistefan/mcp-dealfinder"
 }

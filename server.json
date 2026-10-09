@@ -1,0 +1,15 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.petrovicistefan/mcp-dealfinder",
+  "description": "Search affiliate product feeds from any network and return tracked buy links with a disclosure.",
+  "repository": { "url": "https://github.com/petrovicistefan/mcp-dealfinder", "source": "github" },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "mcp-dealfinder",
+      "version": "0.1.0",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}
