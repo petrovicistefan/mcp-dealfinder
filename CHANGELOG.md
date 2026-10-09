@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 — 2026-10-09
+
+- Test script works on Node 20 (no glob in `npm test`)
+- README: author and availability section
+- Package metadata: homepage, bugs, author URL, MCP registry name (`mcpName`)
+
 ## 0.1.0 — 2026-10-07
 
 Initial public release.

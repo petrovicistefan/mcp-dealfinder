@@ -1,6 +1,6 @@
 {
   "name": "mcp-dealfinder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server that searches affiliate product feeds from any network and returns tracked buy links with a visible disclosure.",
   "keywords": [
     "mcp",
