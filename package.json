@@ -44,7 +44,7 @@
     "build": "tsc",
     "prepare": "tsc",
     "dev": "tsx src/index.ts",
-    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "test": "node --import tsx --test test/*.test.ts",
     "check": "tsx scripts/check.ts",
     "link-template": "tsx scripts/link-template.ts"
   },
