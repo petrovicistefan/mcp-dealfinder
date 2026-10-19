@@ -1,7 +1,7 @@
 {
   "name": "mcp-dealfinder",
-  "version": "0.1.1",
-  "description": "MCP server that searches affiliate product feeds from any network and returns tracked buy links with a visible disclosure.",
+  "version": "0.1.2",
+  "description": "MCP server that turns your affiliate feeds (Awin, Amazon, CJ, Impact, 2Performant) into AI shopping answers with your tracked links and a clear disclosure.",
   "keywords": [
     "mcp",
     "model-context-protocol",
@@ -11,7 +11,11 @@
     "affiliate-marketing",
     "shopping",
     "deals",
-    "claude"
+    "claude",
+    "amazon-associates",
+    "ecommerce",
+    "mcp-server",
+    "ai-agents"
   ],
   "license": "MIT",
   "author": {

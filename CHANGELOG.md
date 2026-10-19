@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2 — 2026-10-19
+
+Documentation release:
+
+- README rewrite: comprehensive structure with badges, quickstart, demo placeholder, TOC, comparison table, FAQ
+- Positioned for affiliate marketers (not developer guardrails suite)
+- Added topics: amazon-associates, ecommerce, mcp-server, ai-agents
+- Updated package description to list supported networks
+- Comparison with OpenAffiliate, Affiliate.com MCP, and Fewsats amazon-mcp
+
 ## 0.1.1 — 2026-10-09
 
 - Test script works on Node 20 (no glob in `npm test`)
