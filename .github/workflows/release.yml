@@ -1,0 +1,110 @@
+name: Release
+
+# Push a tag like v0.1.2 (after bumping version in package.json AND server.json) to publish to
+# npm and the official MCP Registry. npm uses Trusted Publishing (OIDC), so no token is stored:
+# on npmjs.com the package's trusted publisher must be this repository + workflow file release.yml.
+#
+# Or trigger manually via workflow_dispatch with an existing tag (e.g., to publish v0.1.2 after
+# configuring npm trusted publisher).
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish (e.g., v0.1.2)'
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Determine ref to test
+        id: ref
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "ref=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "ref=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.ref.outputs.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm test
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Determine ref to publish
+        id: ref
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "ref=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+            echo "tag_name=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "ref=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+            echo "tag_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.ref.outputs.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      # Trusted Publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@latest
+      - run: npm ci
+      - name: Versions agree
+        run: |
+          p=$(node -p 'require("./package.json").version')
+          s=$(node -p 'require("./server.json").version')
+          q=$(node -p 'require("./server.json").packages[0].version')
+          tag="${{ steps.ref.outputs.tag_name }}"
+          test "v$p" = "$tag" && test "$s" = "$p" && test "$q" = "$p" || { echo "version mismatch: tag $tag package $p server.json $s/$q"; exit 1; }
+      - name: Publish to npm (OIDC, with provenance)
+        run: |
+          v=$(node -p 'require("./package.json").version')
+          if npm view "mcp-dealfinder@$v" version --prefer-online >/dev/null 2>&1; then
+            echo "mcp-dealfinder@$v is already on npm, not publishing it again"
+          else
+            npm publish --provenance --access public
+          fi
+      # npm needs a few minutes to serve a new version, and the MCP Registry checks npm when it validates.
+      - name: Wait until npm serves this version
+        run: |
+          v=$(node -p 'require("./package.json").version')
+          for i in $(seq 1 40); do
+            npm view "mcp-dealfinder@$v" version --prefer-online >/dev/null 2>&1 && { echo "npm serves $v"; exit 0; }
+            sleep 15
+          done
+          echo "npm does not serve $v after 10 minutes"; exit 1
+      - name: Publish to the official MCP Registry
+        run: |
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${{ steps.ref.outputs.tag_name }}"
+          # Check if release already exists
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists, skipping creation"
+          else
+            gh release create "$tag" --title "$tag" --generate-notes
+          fi
