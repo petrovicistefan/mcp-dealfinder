@@ -6,22 +6,43 @@ MCP server for affiliate marketers that lets AI assistants search product feeds 
 
 [![npm version](https://img.shields.io/npm/v/mcp-dealfinder?color=blue)](https://www.npmjs.com/package/mcp-dealfinder)
 [![npm downloads](https://img.shields.io/npm/dm/mcp-dealfinder)](https://www.npmjs.com/package/mcp-dealfinder)
+[![Glama](https://glama.ai/mcp/servers/petrovicistefan/mcp-dealfinder/badges/score.svg)](https://glama.ai/mcp/servers/petrovicistefan/mcp-dealfinder)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/petrovicistefan/mcp-dealfinder?style=social)](https://github.com/petrovicistefan/mcp-dealfinder)
 
 ---
 
-## ⚡ Quick Start
+## ⚡ Quick Install
 
-### Install via npx (no installation needed)
+### Add to Cursor
+
+[![Install in Cursor](https://img.shields.io/badge/Install%20in-Cursor-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=white)](cursor://anysphere.cursor-deeplink/mcp/install?name=dealfinder&config=eyJkZWFsZmluZGVyIjp7ImNvbW1hbmQiOiJucHgiLCJhcmdzIjpbIi15IiwibWNwLWRlYWxmaW5kZXIiXX19)
+
+**One-click install:** Click the badge above or [this install link](cursor://anysphere.cursor-deeplink/mcp/install?name=dealfinder&config=eyJkZWFsZmluZGVyIjp7ImNvbW1hbmQiOiJucHgiLCJhcmdzIjpbIi15IiwibWNwLWRlYWxmaW5kZXIiXX19)
+
+**Manual setup:** Add to your Cursor MCP settings or `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "dealfinder": {
+      "command": "npx",
+      "args": ["-y", "mcp-dealfinder"],
+      "env": { "DEALFINDER_CONFIG": "/absolute/path/to/dealfinder.config.json" }
+    }
+  }
+}
+```
+
+### Add to Claude
+
+**Claude Code (CLI):**
 
 ```bash
-npx mcp-dealfinder
+claude mcp add dealfinder -- npx -y mcp-dealfinder
 ```
 
-### Claude Desktop
-
-Add to `claude_desktop_config.json`:
+**Claude Desktop:** Add to `claude_desktop_config.json`:
 
 ```json
 {
@@ -35,9 +56,9 @@ Add to `claude_desktop_config.json`:
 }
 ```
 
-### Cursor / VS Code
+### Add to VS Code
 
-Add to your MCP settings:
+Create or edit `.vscode/mcp.json` in your workspace:
 
 ```json
 {
@@ -51,23 +72,23 @@ Add to your MCP settings:
 }
 ```
 
-### Try It Immediately (Demo Mode)
+### Run with npx
 
-With no config file, DealFinder starts with **fictional demo products** so you can test it right away. Ask your AI:
+```bash
+npx -y mcp-dealfinder
+```
+
+### Environment Variables
+
+Set `DEALFINDER_CONFIG` to the absolute path of your [configuration file](#configure-your-feeds) containing affiliate network credentials and feed URLs.
+
+**Demo Mode:** Run without `DEALFINDER_CONFIG` to test with fictional demo products.
 
 > *"Find noise-cancelling headphones under 150 EUR and compare the top two"*
 
 **⭐ Star this repository if it helps you!** → [Give a star](https://github.com/petrovicistefan/mcp-dealfinder)
 
 ---
-
-<!--
-## 🎬 Demo
-
-![DealFinder Demo](docs/demo.gif)
-
-TODO: Add a demo GIF showing search and link generation
--->
 
 ---
 
@@ -105,16 +126,16 @@ DealFinder solves this:
 
 ## Features
 
-### MCP Tools
+## Tools
 
-| Tool | What It Does |
-|------|--------------|
-| `search_products` | Keyword search with price, currency, network, and merchant filters. Diacritics-insensitive. Returns up to 20 results ranked by relevance or price. |
-| `compare_products` | Side-by-side comparison of 2–5 products with the cheapest marked. |
-| `get_buy_link` | Returns the affiliate link for one product (with your IDs and disclosure text). |
-| `dealfinder_status` | Shows feed counts, errors, and which networks produce tracked links. |
+| Tool | Description | Key Parameters |
+|------|-------------|----------------|
+| **search_products** | Search affiliate product feeds by keywords. Returns products with price, merchant, and buy link. Filters by price range, currency (no conversion), network, and merchant. Diacritics-insensitive. Returns up to 20 results ranked by relevance or price. | `query` (required), `max_price`, `min_price`, `currency`, `network`, `merchant`, `sort`, `limit`, `sub_id` |
+| **compare_products** | Side-by-side comparison of 2–5 products by `ref`. Marks the cheapest when all share one currency. Full product details included. | `refs` (2-5 refs, required), `sub_id` |
+| **get_buy_link** | Returns the affiliate link for one product (with your IDs and disclosure text). Use `ref` from search results. | `ref` (required), `sub_id` |
+| **dealfinder_status** | Shows loaded feeds (counts, last refresh, errors) and which networks produce tracked links. Config diagnostics. | None |
 
-All tools accept an optional `sub_id` parameter to tag links (useful for tracking which post/page generated the sale).
+**All tools accept an optional `sub_id` parameter** to tag links for tracking (e.g., campaign name, post ID, or page slug). This appears in your network's reports.
 
 ### Core Capabilities
 
@@ -370,7 +391,15 @@ See [GitHub Issues](https://github.com/petrovicistefan/mcp-dealfinder/issues) fo
 
 ## License
 
-[MIT](LICENSE). Paid extensions built on this library are distributed separately.
+MIT License - see [LICENSE](LICENSE) for details.
+
+Copyright © 2026 Stefan Petrovici
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ---
 
