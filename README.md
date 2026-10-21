@@ -16,9 +16,13 @@ MCP server for affiliate marketers that lets AI assistants search product feeds 
 
 ### Add to Cursor
 
-[![Install in Cursor](https://img.shields.io/badge/Install%20in-Cursor-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=white)](cursor://anysphere.cursor-deeplink/mcp/install?name=dealfinder&config=eyJkZWFsZmluZGVyIjp7ImNvbW1hbmQiOiJucHgiLCJhcmdzIjpbIi15IiwibWNwLWRlYWxmaW5kZXIiXX19)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=dealfinder&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1kZWFsZmluZGVyIl19)
 
-**One-click install:** Click the badge above or [this install link](cursor://anysphere.cursor-deeplink/mcp/install?name=dealfinder&config=eyJkZWFsZmluZGVyIjp7ImNvbW1hbmQiOiJucHgiLCJhcmdzIjpbIi15IiwibWNwLWRlYWxmaW5kZXIiXX19)
+**One-click install:** Click the badge above or use this deeplink:
+
+```
+cursor://anysphere.cursor-deeplink/mcp/install?name=dealfinder&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIm1jcC1kZWFsZmluZGVyIl19
+```
 
 **Manual setup:** Add to your Cursor MCP settings or `.cursor/mcp.json`:
 
@@ -58,7 +62,9 @@ claude mcp add dealfinder -- npx -y mcp-dealfinder
 
 ### Add to VS Code
 
-Create or edit `.vscode/mcp.json` in your workspace:
+**One-click install:** [Install in VS Code](https://insiders.vscode.dev/redirect/mcp/install?name=dealfinder&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-dealfinder%22%5D%7D)
+
+**Manual setup:** Create or edit `.vscode/mcp.json` in your workspace:
 
 ```json
 {
