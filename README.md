@@ -96,6 +96,12 @@ Set `DEALFINDER_CONFIG` to the absolute path of your [configuration file](#confi
 
 ---
 
+## 🎬 Demo
+
+![DealFinder Demo](docs/demo.gif)
+
+---
+
 ---
 
 ## 📋 Table of Contents
